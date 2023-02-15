@@ -1,0 +1,26 @@
+html
+  head 
+    title="Update Info"
+    link(href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet")
+  body 
+    div(class="container mt-2")
+      h2(class="pb-2 border-bottom")="Update Contact Info"
+
+      form(class="mt-2" method="post" action="")
+
+        div(class="form row")
+          div(class="form-group")
+              label(for="emailField")="Current E-mail Address:"
+              input(type="email" readonly class="form-control-plaintext" id="oldEmailField" name="oldEmail" value=session.email)
+        
+        div(class="form row")
+          div(class="form-group")
+              label(for="emailField")="New E-mail Address:"
+              input(type="email" class="form-control" id="emailField" name="email" placeholder="Please enter a new e-mail address" required)
+
+        div(class="form row mt-3")
+          div(class="col-auto")
+            button(type="submit" class="btn btn-primary")="Update"
+          div(class="col-auto")
+            button(type="button" class="btn btn-outline-dark" onclick="history.back()")="Cancel"
+        

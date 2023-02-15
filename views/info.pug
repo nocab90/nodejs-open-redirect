@@ -1,0 +1,36 @@
+html
+    head
+        title="My Info"
+        link(href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet")
+    
+    body
+        div(class="container")
+            h2(class="pb-2 border-bottom")="My Account Info"
+            if error 
+                p(class="alert alert-danger")=error
+            
+            table(class="table")
+                thead
+                    tr
+                        th(scope="col")="Username"
+                        th(scope="col")="Password"
+                        th(scope="col")="E-mail"
+                tbody 
+                    tr 
+                        td=session.username
+                        td=session.password 
+                        td=session.email
+
+            div(class="row")
+                div(class="col-auto")
+                    a(class="btn btn-primary" href="/update" role="button")="Update Contact Info"
+                
+                form(action="" method="post" class="col-auto")
+                    if showPass
+                        button(class="btn btn-light" type="submit")="Hide Password"
+                    else
+                        button(class="btn btn-secondary" type="submit")="Show Password"
+
+                div(class="col-auto")
+                    a(class="btn btn-outline-dark" href="/" role="button")="Home"
+
