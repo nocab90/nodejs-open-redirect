@@ -4,8 +4,20 @@ html
         link(href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet")
     
     body
-        div(class="container")
-            h2(class="pb-2 border-bottom")="My Account Info"
+        nav(class="navbar navbar-expand navbar-dark bg-dark")
+            div(class="container")
+                a(class="navbar-brand")="MyBank"
+                ul(class="navbar-nav me-auto")
+                    li(class="nav-item")
+                        a(class="nav-link" href="/account")="Account"
+                    li(class="nav-item")
+                        a(class="nav-link disabled" href="/info")="Profile"
+                    li(class="nav-item")
+                        a(class="nav-link" href="/contact")="Contact Us"
+
+
+        div(class="container mt-3")
+            h2(class="pb-2 border-bottom")="My Profile"
             if error 
                 p(class="alert alert-danger")=error
             
@@ -32,5 +44,5 @@ html
                         button(class="btn btn-secondary" type="submit")="Show Password"
 
                 div(class="col-auto")
-                    a(class="btn btn-outline-dark" href="/" role="button")="Home"
+                    a(class="btn btn-outline-dark" href="/" role="button")="Back to Home"
 

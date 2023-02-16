@@ -2,13 +2,24 @@ html
   head 
     title="MyBank Login"
     link(href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet")
-  body 
-    div(class="container")
+  body
+    nav(class="navbar navbar-expand navbar-dark bg-dark")
+            div(class="container")
+                a(class="navbar-brand")="MyBank"
+                ul(class="navbar-nav me-auto")
+                    li(class="nav-item")
+                        a(class="nav-link" href="/account")="Account"
+                    li(class="nav-item")
+                        a(class="nav-link" href="/info")="Profile"
+                    li(class="nav-item")
+                        a(class="nav-link" href="/contact")="Contact Us"
+
+    div(class="container mt-3")
       h2(class="pb-2 border-bottom")="MyBank Login"
       if error 
         p(class="alert alert-danger")=error
 
-      form(class="row g-3" method="post" action="")
+      form(class="row g-3 mt-1" method="post" action="")
         div(class="col-auto")
           input(type="text" class="form-control" name="username" placeholder="Username")
 
@@ -20,4 +31,4 @@ html
             button(type="submit" class="btn btn-primary mb-3")="Login"
             
           div(class="col-auto")
-            button(type="button" class="btn btn-outline-dark" onclick="history.back()")="Back"
+            a(class="btn btn-outline-dark" href="/" role="button")="Back to Home"
