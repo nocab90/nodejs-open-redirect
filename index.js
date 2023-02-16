@@ -17,7 +17,7 @@ const allowedListForRedirection = [
   "/login",
   "/logout",
   "/account",
-  "/balance",
+  // "/balance",
   "/info",
   "/update",
 ];
@@ -64,8 +64,6 @@ app.post("/login", (req, res) => {
           } else {
             res.redirect("/");
           }
-
-          //res.redirect(req.query.redirect_url ? req.query.redirect_url : "/");
         } else {
           res.render("login", { error: "Username or password is incorrect" });
         }
@@ -84,7 +82,10 @@ app.get("/logout", (req, res) => {
 
 /** Simulated bank functionality */
 app.get("/", (req, res) => {
-  res.render("index", { isLoggedIn: req.session.isLoggedIn });
+  res.render("index", {
+    isLoggedIn: req.session.isLoggedIn,
+    username: req.session.username,
+  });
 });
 
 app.get("/info", (req, res) => {
@@ -165,24 +166,25 @@ app.post("/update", (req, res) => {
   }
 });
 
-app.get("/balance", (req, res) => {
+//Combined '/balance' with '/account'
+/* app.get("/balance", (req, res) => {
   if (req.session.isLoggedIn === true) {
     res.send("Your account balance is $1234.52");
   } else {
     res.redirect("/login?redirect_url=/balance");
   }
-});
+}); */
 
 app.get("/account", (req, res) => {
   if (req.session.isLoggedIn === true) {
-    res.send("Your account number is ACL9D42294");
+    res.render("account");
   } else {
     res.redirect("/login?redirect_url=/account");
   }
 });
 
 app.get("/contact", (req, res) => {
-  res.send("Our address : 321 Main Street, Beverly Hills.");
+  res.render("contact");
 });
 
 /** App listening on port */
