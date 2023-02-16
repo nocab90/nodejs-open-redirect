@@ -1,0 +1,33 @@
+html
+    head
+        title="My Info"
+        link(href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet")
+    
+    body
+        nav(class="navbar navbar-expand navbar-dark bg-dark")
+            div(class="container")
+                a(class="navbar-brand")="MyBank"
+                ul(class="navbar-nav me-auto")
+                    li(class="nav-item")
+                        a(class="nav-link disabled" href="/account")="Account"
+                    li(class="nav-item")
+                        a(class="nav-link" href="/info")="Profile"
+                    li(class="nav-item")
+                        a(class="nav-link" href="/contact")="Contact Us"
+    
+        div(class="container mt-3")
+            h2(class="pb-2 border-bottom")="Account Information"
+
+            table(class="table")
+                thead
+                    tr 
+                        th(scope="col")="Account Number"
+                        th(scope="col")="Balance"
+                tbody 
+                    tr
+                        td="ACL9D42294"
+                        td="$1234.52"
+            
+            div(class="row")
+                div(class="col-auto")
+                    a(class="btn btn-outline-dark" href="/" role="button")="Back to Home"
