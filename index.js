@@ -6,6 +6,7 @@ const app = express();
 const port = 3000;
 
 //Establish connection to MySQL database
+//Using credentials {nodelogin, nodelogin} for database 'nodelogin'
 const connection = mysql.createConnection({
   host: "localhost",
   user: "nodelogin",
@@ -17,7 +18,6 @@ const allowedListForRedirection = [
   "/login",
   "/logout",
   "/account",
-  // "/balance",
   "/info",
   "/update",
 ];
@@ -39,6 +39,7 @@ app.get("/login", (req, res) => {
 app.post("/login", (req, res) => {
   const { username, password } = req.body;
 
+  //Check if user did NOT enter blank fields for username and password
   if (username && password) {
     connection.query(
       "SELECT * FROM accounts WHERE username = ? AND password = ?",
@@ -47,13 +48,15 @@ app.post("/login", (req, res) => {
         // If there is an issue with the query, output the error
         if (error) throw error;
 
-        // If the account exists
+        // If query returns result
         if (results.length > 0) {
           req.session.isLoggedIn = true;
           req.session.username = username;
           req.session.showPass = false;
 
+          //Check if redirection is active
           if (req.query.redirect_url) {
+            //Only redirect if redirect_url is in included list, else go back to home
             if (
               allowedListForRedirection.indexOf(req.query.redirect_url) > -1
             ) {
@@ -116,7 +119,7 @@ app.get("/info", (req, res) => {
   }
 });
 
-//For Show Password button
+//Toggle for showing/masking password
 app.post("/info", (req, res) => {
   if (req.session.isLoggedIn === true) {
     if (!req.session.showPass) {
@@ -130,6 +133,7 @@ app.post("/info", (req, res) => {
   }
 });
 
+//Render update form to change email
 app.get("/update", (req, res) => {
   if (req.session.isLoggedIn === true) {
     const username = req.session.username;
@@ -148,6 +152,7 @@ app.get("/update", (req, res) => {
   }
 });
 
+//Post Request to MySQL db to change user's email
 app.post("/update", (req, res) => {
   if (req.session.isLoggedIn === true) {
     const username = req.session.username;
@@ -157,7 +162,6 @@ app.post("/update", (req, res) => {
       [newEmail, username],
       function (error) {
         if (error) throw error;
-        console.log("Update executed.");
       }
     );
     res.redirect("/info");
@@ -166,15 +170,7 @@ app.post("/update", (req, res) => {
   }
 });
 
-//Combined '/balance' with '/account'
-/* app.get("/balance", (req, res) => {
-  if (req.session.isLoggedIn === true) {
-    res.send("Your account balance is $1234.52");
-  } else {
-    res.redirect("/login?redirect_url=/balance");
-  }
-}); */
-
+//For viewing Account number/balance
 app.get("/account", (req, res) => {
   if (req.session.isLoggedIn === true) {
     res.render("account");
@@ -183,6 +179,7 @@ app.get("/account", (req, res) => {
   }
 });
 
+//Contact page
 app.get("/contact", (req, res) => {
   res.render("contact");
 });
