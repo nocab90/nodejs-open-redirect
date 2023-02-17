@@ -88,6 +88,7 @@ app.get("/", (req, res) => {
   res.render("index", { isLoggedIn: req.session.isLoggedIn });
 });
 
+//Load info page, query user info
 app.get("/info", (req, res) => {
   if (req.session.isLoggedIn === true) {
     const username = req.session.username;
