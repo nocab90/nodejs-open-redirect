@@ -27,7 +27,7 @@ app.set("view engine", "pug"); // Setup the pug
 app.use(bodyParser.urlencoded({ extended: true })); // Setup the body parser to handle form submits
 app.use(session({ secret: "super-secret" })); // Session setup
 
-/** Handle login display and form submit */
+//For login page
 app.get("/login", (req, res) => {
   if (req.session.isLoggedIn === true) {
     return res.redirect("/");
@@ -77,18 +77,15 @@ app.post("/login", (req, res) => {
   }
 });
 
-/** Handle logout function */
+//For logout
 app.get("/logout", (req, res) => {
   req.session.isLoggedIn = false;
   res.redirect("/");
 });
 
-/** Simulated bank functionality */
+//For home page
 app.get("/", (req, res) => {
-  res.render("index", {
-    isLoggedIn: req.session.isLoggedIn,
-    username: req.session.username,
-  });
+  res.render("index", { isLoggedIn: req.session.isLoggedIn });
 });
 
 app.get("/info", (req, res) => {
@@ -184,7 +181,7 @@ app.get("/contact", (req, res) => {
   res.render("contact");
 });
 
-/** App listening on port */
+//App listening on port 3000
 app.listen(port, () => {
   console.log(`MyBank app listening at http://localhost:${port}`);
 });
