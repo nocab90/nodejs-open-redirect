@@ -21,5 +21,34 @@ html
         else
           li(class="nav-item")
             a(class="nav-link active" href="/login")="Login"
+
+  div(class="container mt-3")
+    h2(class="pb-2 border-bottom")="Welcome to MyBank!"
+
+    div(class="row mt-3 md-2")
+      h4="What would you like to do today?"
+
+    div(class="row")
+      div(class="col")
+        div(class="card" style="width: 18rem;")
+          div(class="card-body")
+            h5(class="card-title")="View My Account Info"
+              h6(class="card-text")="View your account number or check your balance."
+              a(href="/account" class="btn btn-secondary")="Account Info"
+
+      div(class="col")
+        div(class="card" style="width: 18rem;")
+          div(class="card-body")
+            h5(class="card-title")="View My Profile"
+              h6(class="card-text")="View your profile and update contact info."
+              a(href="/info" class="btn btn-secondary")="My Profile"
+
+      div(class="col")
+        div(class="card" style="width: 18rem;")
+          div(class="card-body")
+            h5(class="card-title")="Contact MyBank"
+              h6(class="card-text")="Get in touch with us for bank enquiries."
+              a(href="/contact" class="btn btn-secondary")="Contact Us"
+
         
         
