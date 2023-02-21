@@ -50,29 +50,42 @@ app.post("/login", (req, res) => {
 
         // If query returns result
         if (results.length > 0) {
-          req.session.isLoggedIn = true;
-          req.session.username = username;
-          req.session.showPass = false;
+          //Case sensitive check
+          if (
+            username == results[0].username &&
+            password == results[0].password
+          ) {
+            console.log("Case Sensitive check passed.");
+            req.session.isLoggedIn = true;
+            req.session.username = username;
+            req.session.showPass = false;
 
-          //Check if redirection is active
-          if (req.query.redirect_url) {
-            //Only redirect if redirect_url is in included list, else go back to home
-            if (
-              allowedListForRedirection.indexOf(req.query.redirect_url) > -1
-            ) {
-              res.redirect(req.query.redirect_url);
+            //Check if redirection is active
+            if (req.query.redirect_url) {
+              //Only redirect if redirect_url is in included list, else go back to home
+              if (
+                allowedListForRedirection.indexOf(req.query.redirect_url) > -1
+              ) {
+                res.redirect(req.query.redirect_url);
+              } else {
+                res.redirect("/");
+              }
             } else {
+              //If redirection is not active
               res.redirect("/");
             }
           } else {
-            res.redirect("/");
+            //If case sensitive check fails
+            res.render("login", { error: "Username or password is incorrect" });
           }
         } else {
+          //If query returns no results
           res.render("login", { error: "Username or password is incorrect" });
         }
       }
     );
   } else {
+    //If either username or password is empty
     res.render("login", { error: "Username or password is incorrect" });
   }
 });
