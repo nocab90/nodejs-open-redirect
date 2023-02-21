@@ -55,7 +55,6 @@ app.post("/login", (req, res) => {
             username == results[0].username &&
             password == results[0].password
           ) {
-            console.log("Case Sensitive check passed.");
             req.session.isLoggedIn = true;
             req.session.username = username;
             req.session.showPass = false;
