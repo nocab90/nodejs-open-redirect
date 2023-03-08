@@ -13,6 +13,8 @@ INSERT INTO `accounts` (`id`, `username`, `password`, `email`) VALUES (1, 'test'
 ALTER TABLE `accounts` ADD PRIMARY KEY (`id`);
 ALTER TABLE `accounts` MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
 
+CREATE USER 'nodelogin'@'localhost';
+
 GRANT ALL privileges ON nodelogin.* TO 'nodelogin'@'localhost';
 
 ALTER USER 'nodelogin'@'localhost' IDENTIFIED WITH mysql_native_password BY 'nodelogin';
